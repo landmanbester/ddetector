@@ -7,6 +7,9 @@ to automatically identify regions requiring direction-dependent calibration.
 
 import numpy as np
 import jax
+jax.config.update("jax_enable_x64", True)
+jax.config.update('jax_platform_name', 'cpu')
+jax.config.update('jax_log_compiles', False)
 import jax.numpy as jnp
 from jax import jit, vmap
 from astropy.io import fits
@@ -23,6 +26,7 @@ from pathlib import Path
 from typing import Tuple, List, Dict, Optional, Union
 from dataclasses import dataclass
 import json
+from .core import RegionInfo, DetectionParameters
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -40,16 +44,6 @@ class DetectionParameters:
     morphology_disk_size: int = 3  # Morphological operations disk size
     edge_buffer_pixels: int = 20  # Buffer from image edges
 
-@dataclass
-class RegionInfo:
-    """Information about a detected calibration region."""
-    center_ra: float
-    center_dec: float
-    radius_arcsec: float
-    confidence: float
-    detection_type: str  # 'negative', 'spike', 'ripple', 'combined'
-    pixel_coords: Tuple[int, int]
-    stats: Dict[str, float]
 
 class ResidualImageAnalyzer:
     """Analyzes residual images for direction-dependent calibration regions."""
@@ -107,10 +101,12 @@ class ResidualImageAnalyzer:
         logger.info(f"Image statistics: RMS={stats['rms']:.2e}, robust_sigma={stats['robust_sigma']:.2e}")
         return stats
 
-    @jit
-    def detect_negative_outliers(self, data: jnp.ndarray, threshold_sigma: float,
-                                robust_sigma: float) -> jnp.ndarray:
+    # @jit
+    def detect_negative_outliers(self, data: jnp.ndarray,
+                                 threshold_sigma: float,
+                                 robust_sigma: float) -> jnp.ndarray:
         """Detect significant negative outliers using JAX."""
+        print(data, threshold_sigma, robust_sigma)
         threshold = -threshold_sigma * robust_sigma
         return data < threshold
 

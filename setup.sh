@@ -82,7 +82,6 @@ dependencies = [
     "scikit-learn>=1.0.0",
     "scikit-image>=0.18.0",
     "astropy>=5.0.0",
-    "numba>=0.56.0",
     "matplotlib>=3.5.0",
     "click>=8.0.0",
 ]
@@ -172,7 +171,6 @@ module = [
     "scipy.*",
     "sklearn.*",
     "skimage.*",
-    "numba.*",
     "ray.*",
     "dask.*",
 ]

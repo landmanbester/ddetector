@@ -363,7 +363,7 @@ class DetectionResult:
                 'spike': len(self.get_regions_by_type('spike')),
                 'ripple': len(self.get_regions_by_type('ripple')),
             },
-            'image_stats': self.image_stats.to_dict(),
+            'image_stats': self.image_stats,
             'detection_params': self.detection_params.to_dict(),
             'metadata': self._analysis_metadata,
         }

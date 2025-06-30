@@ -14,6 +14,10 @@ from typing import Optional, List
 
 import click
 import numpy as np
+import jax
+jax.config.update("jax_enable_x64", True)
+jax.config.update('jax_platform_name', 'cpu')
+jax.config.update('jax_log_compiles', False)
 
 from .core import DetectionParameters, DetectionResult
 from .detection import ResidualImageAnalyzer
@@ -144,6 +148,7 @@ def detect(input_fits: Path, output_prefix: str, output_format: str,
         logger.info("Analysis completed successfully!")
 
     except Exception as e:
+        import ipdb; ipdb.set_trace()
         logger.error(f"Analysis failed: {e}")
         if verbose:
             raise
@@ -332,7 +337,7 @@ def _report_detection_results(result: DetectionResult):
     high_confidence = 0
 
     for region in result.regions:
-        for det_type in region.get_detection_types():
+        for det_type in region.detection_type:
             type_counts[det_type] = type_counts.get(det_type, 0) + 1
 
         if region.confidence > 0.7:
