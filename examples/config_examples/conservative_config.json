@@ -1,0 +1,11 @@
+{
+  "negative_threshold_sigma": 4.0,
+  "spike_threshold_percentile": 98.0,
+  "ripple_frequency_range": [0.2, 1.8],
+  "min_region_size_pixels": 80,
+  "clustering_eps": 20.0,
+  "clustering_min_samples": 10,
+  "morphology_disk_size": 4,
+  "edge_buffer_pixels": 30,
+  "description": "Conservative settings to minimize false positives"
+}

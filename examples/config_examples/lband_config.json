@@ -1,0 +1,11 @@
+{
+  "negative_threshold_sigma": 3.0,
+  "spike_threshold_percentile": 95.0,
+  "ripple_frequency_range": [0.1, 1.5],
+  "min_region_size_pixels": 50,
+  "clustering_eps": 10.0,
+  "clustering_min_samples": 5,
+  "morphology_disk_size": 3,
+  "edge_buffer_pixels": 20,
+  "description": "Standard configuration for L-band (1-2 GHz) observations"
+}
