@@ -18,7 +18,7 @@ import jax.numpy as jnp
 from pathlib import Path
 import json
 
-from ddcal_detector import RegionInfo, ResidualImageAnalyzer
+from ddetector import RegionInfo, ResidualImageAnalyzer
 
 
 class DetectionVisualizer:
